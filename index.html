@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stand de Carros</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            scroll-behavior: smooth;
+            height: 100%;
+            margin: 0;
+            font-family: 'Anton', sans-serif;
+        }
+        .section {
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding:10vh;
+        }
+        .cover {
+            background-image: url('background.jpg'); 
+            background-size: cover;
+            background-position: center;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+        }
+        .car-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .car-item {
+            width: 200px;
+            margin: 10px;
+            background-color: #444;
+            padding: 10px;
+            color: white;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        @media (min-width: 768px) {
+            .contact-form {
+                display: flex;
+                justify-content: space-between;
+            }
+            .form-left {
+                width: 50%;
+            }
+            .map-image {
+                width: 50%;
+                background-image: url('map-image.jpg'); /* Insira a imagem do mapa aqui */
+                background-size: cover;
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#"><img src="IMG/Logo.png" alt="Logo" style="height: 40px;"></a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#quem-somos">Quem somos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#carros">Carros</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="section cover">
+        <h1 style="position: absolute; bottom: 20px; right: 20px;">Stand de Carros</h1>
+    </div>
+
+    <div class="section" id="quem-somos" style="background-color: #007BFF;">
+        <h2>Quem Somos</h2>
+        <p>Bem-vindo ao nosso stand de carros, onde oferecemos uma seleção diversificada de veículos. A nossa missão é proporcionar a melhor experiência de compra e atendimento ao cliente.</p>
+    </div>
+
+    <div class="section" id="carros" style="background-color: #28A745;">
+        <h2>A Gasolina</h2>
+        <div class="car-list" id="gasolina-list">
+            <!-- Lista de carros a gasolina será gerada aqui -->
+        </div>
+
+        <h2>A Gasóleo</h2>
+        <div class="car-list" id="gasoleo-list">
+            <!-- Lista de carros a gasóleo será gerada aqui -->
+        </div>
+
+        <h2>Carros Elétricos</h2>
+        <div class="car-list" id="eletricos-list">
+            <!-- Lista de carros elétricos será gerada aqui -->
+        </div>
+    </div>
+
+    <div class="section" id="contacto" style="background-color: #17A2B8;">
+        <h2>Contacto</h2>
+        <div class="contact-form">
+            <div class="form-left">
+                <form action="mailto:exemplo@hotmail.com" method="POST" enctype="text/plain">
+                    <div class="form-group">
+                        <label for="name">Nome:</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem:</label>
+                        <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+            <div class="map-image"></div>
+        </div>
+    </div>
+
+    <footer class="footer text-center">
+        <p>Redes sociais | Telefone: (00) 0000-0000 | Email: exemplo@hotmail.com</p>
+        <p><a href="#">Termos e Condições</a> | <a href="#">Política de Privacidade</a> | <a href="#">Política de Cookies</a> | <a href="#">Configurações de Privacidade</a></p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Função para carregar os carros a partir de um arquivo XML
+        function loadCars() {
+            $.ajax({
+                type: "GET",
+                url: "carros_gasolina.xml",
+                dataType: "xml",
+                success: function(xml) {
+                    $(xml).find('carro').each(function() {
+                        var modelo = $(this).find('modelo').text();
+                        var imagem = $(this).find('imagem').text();
+                        $('#gasolina-list').append('<div class="car-item"><img src="' + imagem + '" alt="' + modelo + '" style="width: 100%;"><h5>' + modelo + '</h5></div>');
+                    });
+                }
+            });
+
+            // Adicione a lógica semelhante para os outros tipos de carros
+        }
+
+        $(document).ready(function() {
+            loadCars();
+            
+        });
+
+</script>
+
+    </script>
+</body>
+</html>

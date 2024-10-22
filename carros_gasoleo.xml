@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<carros>
+    <carro>
+        <modelo>Modelo 1</modelo>
+        <imagem>IMG/modelo1.jpg</imagem>
+    </carro>
+    <carro>
+        <modelo>Modelo 2</modelo>
+        <imagem>IMG/modelo2.jpg</imagem>
+    </carro>
+    <carro>
+        <modelo>Modelo 3</modelo>
+        <imagem>IMG/modelo3.jpg</imagem>
+    </carro>
+</carros>
